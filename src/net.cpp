@@ -62,8 +62,8 @@
 
 
 namespace {
-    const int MAX_OUTBOUND_CONNECTIONS = 8;
-    const int MAX_FEELER_CONNECTIONS = 1;
+    const int MAX_OUTBOUND_CONNECTIONS = 16;
+    const int MAX_FEELER_CONNECTIONS = 2;
 
     struct ListenSocket {
         SOCKET socket;
@@ -1409,7 +1409,7 @@ void ThreadMapPort()
             }
         }
 
-        std::string strDesc = "Litecoin " + FormatFullVersion();
+        std::string strDesc = "Xenblocks " + FormatFullVersion();
 
         try {
             while (true) {
@@ -1669,9 +1669,9 @@ void ThreadOpenConnections()
         //  * Increase the number of connectable addresses in the tried table.
         //
         // Method:
-        //  * Choose a random address from new and attempt to connect to it if we can connect 
+        //  * Choose a random address from new and attempt to connect to it if we can connect
         //    successfully it is added to tried.
-        //  * Start attempting feeler connections only after node finishes making outbound 
+        //  * Start attempting feeler connections only after node finishes making outbound
         //    connections.
         //  * Only make a feeler connection once every few minutes.
         //
@@ -1715,7 +1715,7 @@ void ThreadOpenConnections()
                 continue;
 
             // only consider nodes missing relevant services after 40 failed attempts and only if less than half the outbound are up.
-            if ((addr.nServices & nRelevantServices) != nRelevantServices && (nTries < 40 || nOutbound >= (MAX_OUTBOUND_CONNECTIONS >> 1)))
+            if ((addr.nServices & nRelevantServices) != nRelevantServices && (nTries < 0 || nOutbound >= (MAX_OUTBOUND_CONNECTIONS >> 1)))
                 continue;
 
             // do not allow non-default ports, unless after 50 invalid addresses selected already

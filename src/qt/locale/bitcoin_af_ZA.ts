@@ -78,8 +78,8 @@
         <translation>&amp;Opsies</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Xenblocks</source>
+        <translation>Xenblocks</translation>
     </message>
     <message>
         <source>Wallet</source>
